@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">android-study</string>
+
+    <!--LoginActivity-->
+    <string name="prompt_id">ID 입력</string>
+    <string name="prompt_pwd">PASSWORD</string>
+    <string name="action_sign_in">로그인</string>
+    <string name="invalid_id">ID를 입력해 주세요.</string>
+    <string name="invalid_pwd">PASSWORD를 입력해 주세요.</string>
+    <string name="auto_login">로그인 상태유지</string>
 </resources>
