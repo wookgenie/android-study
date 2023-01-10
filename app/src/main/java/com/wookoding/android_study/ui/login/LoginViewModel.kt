@@ -4,7 +4,6 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.wookoding.android_study.R
 
 /**
  * LoginActivity ViewModel
@@ -21,13 +20,10 @@ class LoginViewModel : ViewModel() {
     }
 
     fun loginDataChanged(uid: String, upwd: String) {
-        if (uid.isEmpty()) {
-            _loginForm.value = LoginFormState(usernameError = R.string.invalid_id)
-        }
-//        else if (upwd.isEmpty()) {
-//            _loginForm.value = LoginFormState(passwordError = R.string.invalid_pwd)
-//        }
-        else {
+        if (uid.isEmpty() || upwd.isEmpty()) {
+            // 에러 메세지를 만들어 변경할 경우 isDataValid = false이 필요없음.
+            _loginForm.value = LoginFormState(isDataValid = false)
+        } else {
             _loginForm.value = LoginFormState(isDataValid = true)
         }
     }

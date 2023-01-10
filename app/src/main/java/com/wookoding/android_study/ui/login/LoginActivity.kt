@@ -3,6 +3,7 @@ package com.wookoding.android_study.ui.login
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.inputmethod.EditorInfo
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -31,21 +32,12 @@ class LoginActivity : AppCompatActivity() {
 
             // disable login button unless both username / password is valid
             btnLogin.isEnabled = loginState.isDataValid
-
-            if (loginState.usernameError != null) {
-                idEdit.error = getString(loginState.usernameError)
-            }
-            if (loginState.passwordError != null) {
-                pwdEdit.error = getString(loginState.passwordError)
-            }
         })
 
         idEdit.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-            }
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
 
-            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-            }
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
 
             override fun afterTextChanged(p0: Editable?) {
                 loginViewModel.loginDataChanged(
@@ -53,8 +45,30 @@ class LoginActivity : AppCompatActivity() {
                     pwdEdit.text.toString()
                 )
             }
-
         })
+
+        pwdEdit.apply {
+            addTextChangedListener(object : TextWatcher {
+                override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+
+                override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+
+                override fun afterTextChanged(p0: Editable?) {
+                    loginViewModel.loginDataChanged(
+                        idEdit.text.toString(),
+                        pwdEdit.text.toString()
+                    )
+                }
+            })
+
+            setOnEditorActionListener { textView, i, keyEvent ->
+                when (i) {
+                    EditorInfo.IME_ACTION_DONE ->
+                        loginViewModel.requestLogin(idEdit.text.toString(), pwdEdit.text.toString(), checkBox.isChecked)
+                }
+                false
+            }
+        }
 
         btnLogin.setOnClickListener {
             loginViewModel.requestLogin(idEdit.text.toString(), pwdEdit.text.toString(), checkBox.isChecked)
