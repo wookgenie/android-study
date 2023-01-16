@@ -2,18 +2,20 @@ package com.wookoding.android_study.ui
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import com.wookoding.android_study.R
+import com.wookoding.android_study.databinding.ActivityMainBinding
 import com.wookoding.android_study.ui.login.LoginActivity
 
 class MainActivity : AppCompatActivity() {
 
+    private lateinit var binding: ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        findViewById<TextView>(R.id.tv_test).setOnClickListener {
+        binding.login.setOnClickListener {
             startActivity(Intent(this, LoginActivity::class.java))
         }
     }
