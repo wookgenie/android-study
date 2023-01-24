@@ -6,5 +6,5 @@ package com.wookoding.android_study.conf.init
  * @since 2023/01/17
  **/
 object AppConfig {
-    const val BASE_URL = "http://marketdev.webcash.co.kr"
+    const val BASE_URL = ""
 }
