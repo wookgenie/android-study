@@ -1,7 +1,6 @@
 package com.wookoding.android_study.ui.api
 
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.wookoding.android_study.databinding.ActivityApiBinding
@@ -18,15 +17,16 @@ class ApiActivity : AppCompatActivity() {
         binding.apiStart.setOnClickListener {
             lifecycleScope.launch {
                 val reqTest001 = REQ_TEST001(
-                    USER_ID = "",
-                    USER_PW = ""
+                    REQ_TEST001.REQ_REQ_DATA(
+                        USER_ID = "",
+                        USER_PW = ""
+                    )
                 )
                 val repository = Repository().requestTEST(reqTest001)
 
-                if (repository?.code() == 200){
-                    Log.d("JLog", "repository: "+repository)
-                    Log.d("JLog", "body: "+repository.body())
-                    Log.d("JLog", "message: "+repository.message())
+                if (repository?.code() == 200) {
+                    val text = "repository: " + repository + "\nbody: " + repository.body() + "\nmessage: " + repository.message()
+                    binding.tvResData.text = text
                 }
             }
         }

@@ -8,8 +8,13 @@ import com.google.gson.annotations.SerializedName
  * @since 2023/01/17
  **/
 data class REQ_TEST001(
-    @SerializedName("USER_ID")
-    var USER_ID: String,
-    @SerializedName("USER_PW")
-    var USER_PW: String
-)
+    @SerializedName("REQ_DATA")
+    var REQ_DATA: REQ_REQ_DATA
+) {
+    data class REQ_REQ_DATA(
+        @SerializedName("USER_ID")
+        var USER_ID: String,
+        @SerializedName("USER_PW")
+        var USER_PW: String
+    )
+}
